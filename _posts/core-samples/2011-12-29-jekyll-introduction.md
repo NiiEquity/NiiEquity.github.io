@@ -3,8 +3,8 @@ layout: post
 category : lessons
 tagline: "Supporting tagline"
 tags : [intro, beginner, jekyll, tutorial]
+image : "/assets/img/post-bg.jpg"
 ---
-{% include JB/setup %}
 
 This Jekyll introduction will outline specifically  what Jekyll is and why you would want to use it.
 Directly following the intro we'll learn exactly _how_ Jekyll does what it does.
@@ -243,7 +243,7 @@ Render the content variable wherever you want your main content to be injected i
   </div>
 </body>
 ...{% endcapture %}
-{% include JB/liquid_raw %}
+
 
 ### Sub-Templates
 
