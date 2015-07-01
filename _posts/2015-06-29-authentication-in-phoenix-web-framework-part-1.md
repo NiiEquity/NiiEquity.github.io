@@ -13,7 +13,7 @@ web applications which is Authentication.
 
 Phoenix is a framework for building HTML5 apps, API backends and distributed systems. 
 Written in Elixir, you get beautiful syntax, productive tooling and a fast runtime,
-from the [phoenix website](www.phoenixframework.org)
+from the [phoenix website](https://www.phoenixframework.org)
 
 ### Initial Setup
 
@@ -55,11 +55,12 @@ Next we will generate our model for the user, so we will use the phoenix generat
 
 	$ mix phoenix.gen.model User users email:string password:string
 
+
 That will generate the User model which you will find in the `web/models` directory and also a migration which can also be found in `priv/repo/migrations`. You can now run 
 	
 	$ mix ecto.migrate
 
-to create the table and fields in the database.
+to create the table called users and the fields (email which has a type of string and the same for the password) in the database.
 
 So now to the main authentication file.
 
@@ -97,7 +98,7 @@ So the first function we will right will be used to check if hashed and non-hash
 
 
 
-The next function will be the session function, which checks if an email is in the users table.
+The next function will be the session function, which checks if an email is in the users table. It takes all users from the users table and passes it as an argument to the function with the email stored in the session. It then maps through all emails in the users table to see if that email exists. The ```Enum.member?``` function returns true if it exists or false if it doesn't. The ```case...do``` structure then handles the boolean value returned and also returns an atom ``:ok`` with a string and ``:error`` with another string.
 	
 	def session(users, email) do
 	   email_check =
@@ -123,7 +124,7 @@ We then write the letmein function that will also check the email in the databas
 	   {:error, "Please enter a valid email and password"}
 	end
 	defp _letmein(user, password), do: password(user, password)
-
+   
 Lets then write another function, geez too much functions, called login_required that takes an email, checks wether the email is in the database, by calling the session functions. A ```case...do```, which allows us to compare a value against some patterns to find the matching one, handles the email check.
 	
 	def login_required(conn, nil), do: unauthorized(conn)
